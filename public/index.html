@@ -3,20 +3,22 @@
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
 
+  <script src="/javascripts/chat.js"></script>
+  <script src="/javascripts/chat_ui.js"></script>
   <script>
+
     $(function(){
-      var socket = io.connect('http://localhost:8888');
-      socket.on('msg', function(data) {
-        $('#msg-log').append('<li>' + data.text + '</li>');
-      })
-    });
+
+
+    })
+
   </script>
 </head>
 
 <body>
   <h1>Hello</h1>
 
-  <div id="convo">
+  <div id="chat">
     <ul id="msg-log">
     </ul>
 
@@ -25,6 +27,14 @@
       <input type="submit" value="Send">
     </form>
   </div>
-</body>
 
+  <script>
+    var socket = io.connect('http://localhost:8888');
+    var chat = new this.C.Chat(socket);
+    var chat_ui = new this.C.ChatUI($('#chat'), chat);
+    debugger;
+    chat_ui.setUpListeners();
+  </script>
+
+</body>
 </html>

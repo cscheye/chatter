@@ -18,7 +18,8 @@ var router = function(req, res) {
     console.log(path)
     fs.readFile(path, { encoding: 'utf-8' }, function(err, data) {
       if (err) {
-        serveError(res, 404)
+        res.statusCode = 404;
+        res.end('Could not find file')
       } else {
         res.writeHead(
           200,
