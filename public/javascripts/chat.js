@@ -1,11 +1,11 @@
-// $(function(root) {
-//   var C = root.C = (root.C || {})
+(function(root) {
+  var C = root.C = (root.C || {})
 
-//   var Chat = C.Chat = function (socket) {
-//     this.socket = socket;
-//   }
+  var Chat = C.Chat = function (socket) {
+    this.socket = socket;
+  }
 
-//   Chat.sendMessage = function () {
-
-//   }
-// })(this);
+  Chat.prototype.sendMessage = function (message) {
+    this.socket.emit('msg', { text: message })
+  };
+})(this);

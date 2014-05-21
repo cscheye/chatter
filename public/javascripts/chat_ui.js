@@ -12,12 +12,15 @@
       event.preventDefault();
       chat_ui.handleMessage(event);
     })
+
+    this.chat.socket.on('msg', function(data) {
+        chat_ui.displayMessage(data);
+      })
   };
 
   ChatUI.prototype.handleMessage = function (event) {
     var content = this.getNewMessage(event);
     this.sendMessage(content);
-    this.displayMessage(content);
   };
 
   ChatUI.prototype.getNewMessage = function(event) {
@@ -28,9 +31,9 @@
     this.chat.sendMessage(content);
   };
 
-  ChatUI.prototype.displayMessage = function (message) {
+  ChatUI.prototype.displayMessage = function (data) {
     var log = this.$el.find('#msg-log');
-    var content = $('<li>').text(message);
+    var content = $('<li>').text(data.text);
     log.append(content)
   };
 })(this);
